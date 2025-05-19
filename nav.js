@@ -1,4 +1,3 @@
-// js/nav.js
 fetch('nav.html')
   .then(response => {
     if (!response.ok) {
@@ -8,7 +7,19 @@ fetch('nav.html')
   })
   .then(html => {
     document.getElementById('nav-placeholder').innerHTML = html;
+
+    // Initialize dark mode toggle after nav is loaded
+    function tryInitDarkmode() {
+      if (typeof initDarkmode === "function") {
+        initDarkmode();
+      } else {
+        setTimeout(tryInitDarkmode, 50);
+      }
+    }
+    tryInitDarkmode();
   })
   .catch(error => {
     console.error('Error loading nav:', error);
   });
+
+  
